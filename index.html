@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8dce7">
+<title>To My Baby ♡</title>
+<style>
+:root{--pink:#d66b91;--deep:#a84770;--pale:#fff6f9;--ink:#87566b}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--ink);background:linear-gradient(145deg,#fff7fa,#f9dce8 55%,#fff4f7);min-height:100vh;overflow-x:hidden}
+button{font:inherit;cursor:pointer}
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.heart{position:absolute;bottom:-40px;color:#e99ab5;opacity:.45;animation:floatUp linear infinite}
+@keyframes floatUp{to{transform:translateY(-115vh) rotate(35deg);opacity:0}}
+main{position:relative;z-index:1;width:min(100% - 28px,560px);margin:22px auto 42px}
+.panel{background:rgba(255,250,252,.93);border:1px solid #f4d5e1;border-radius:25px;padding:22px 18px;box-shadow:0 14px 40px #a94f7020;text-align:center}
+.kicker{font:11px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#bd7892}
+h1{font-size:clamp(34px,10vw,52px);line-height:1.05;color:var(--deep);font-weight:normal;margin:12px 0 4px}
+h2{font-size:29px;color:var(--deep);font-weight:normal;margin:8px 0 12px}
+p{line-height:1.65;font-size:16px}
+.hero{height:210px;border-radius:19px;background:radial-gradient(circle at 50% 45%,#fff 0,#f8d6e3 52%,#edb7cc 100%);display:grid;place-items:center;margin-bottom:20px;position:relative;overflow:hidden}
+.hero .big{font-size:100px;filter:drop-shadow(0 8px 8px #a8477030)}
+.hero:before,.hero:after{content:"♡";position:absolute;color:#fff9;font-size:65px}
+.hero:before{left:18px;top:8px}.hero:after{right:22px;bottom:4px}
+.date{font:12px Arial,sans-serif;letter-spacing:3px;color:#b77991;margin:15px 0}
+.btn{border:0;border-radius:999px;padding:14px 20px;background:linear-gradient(120deg,#dc83a3,#bd547e);color:white;box-shadow:0 7px 16px #bd547e35;width:100%;margin-top:12px;font:14px Arial,sans-serif;letter-spacing:.4px}
+.btn.secondary{background:#f5e2e9;color:#985a75;box-shadow:none}
+.btn.small{width:auto;padding:10px 16px}
+.screen{display:none}.screen.active{display:block;animation:fade .45s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.gift{font-size:105px;margin:12px auto;cursor:pointer;display:inline-block;transition:transform .25s}
+.gift:active{transform:scale(1.12)}
+.cake{font-size:100px;margin:12px}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.photo{aspect-ratio:1;border:1px dashed #d99ab1;border-radius:16px;background:#fff1f6;display:grid;place-items:center;overflow:hidden;padding:8px;font:12px Arial,sans-serif;color:#b36d88}
+.photo img{width:100%;height:100%;object-fit:cover}
+textarea{width:100%;min-height:150px;border:1px solid #efc8d7;border-radius:15px;padding:14px;background:#fffafd;color:#87566b;font:16px/1.6 Georgia,serif;resize:vertical}
+input[type=file]{max-width:100%;font:12px Arial,sans-serif}
+.note{font:12px/1.5 Arial,sans-serif;color:#b17a90}
+.dots{display:flex;justify-content:center;gap:7px;margin-top:17px}
+.dot{width:7px;height:7px;border-radius:50%;background:#edc6d5}.dot.on{background:#bd547e}
+.footer{font:11px Arial,sans-serif;letter-spacing:1px;text-align:center;color:#bd8298;margin:15px 0}
+.confetti{font-size:25px;letter-spacing:7px}
+@media(max-width:380px){.panel{padding:18px 14px}.hero{height:180px}}
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts"></div>
+<main>
+  <section class="panel screen active" id="s0">
+    <div class="kicker">♡ a little surprise for someone special ♡</div>
+    <div class="hero"><div class="big">💗</div></div>
+    <div class="kicker">NOVEMBER 28</div>
+    <h1>Happy Birthday</h1><h2>My Baby ♡</h2>
+    <p>Today is all about you. I made a little surprise, just for you.</p>
+    <button class="btn" onclick="go(1)">Open your surprise ♡</button>
+  </section>
+
+  <section class="panel screen" id="s1">
+    <div class="kicker">something special, just for you</div>
+    <h2>A little present 🎀</h2>
+    <div class="gift" onclick="openGift()" id="gift">🎁</div>
+    <p id="giftText">Tap the gift box to unwrap it, Baby.</p>
+    <button class="btn" onclick="go(2)">Continue ♡</button>
+    <button class="btn secondary" onclick="go(0)">Back</button>
+  </section>
+
+  <section class="panel screen" id="s2">
+    <div class="kicker">make a wish, my love</div>
+    <h2>Birthday wishes 🎂</h2>
+    <div class="cake">🎂</div>
+    <p id="cakeText">Close your eyes, make a wish, and tap the button.</p>
+    <button class="btn" onclick="wish()">Blow the candles ✨</button>
+    <button class="btn secondary" onclick="go(3)">Next ♡</button>
+  </section>
+
+  <section class="panel screen" id="s3">
+    <div class="kicker">little moments, big memories</div>
+    <h2>Our memories 📸</h2>
+    <p>Choose photos from your phone to add your favourite memories. They show on this phone while this page is open.</p>
+    <div class="photo-grid">
+      <label class="photo" id="p1">♡ Add photo 1<input hidden type="file" accept="image/*" onchange="addPhoto(event,'p1')"></label>
+      <label class="photo" id="p2">♡ Add photo 2<input hidden type="file" accept="image/*" onchange="addPhoto(event,'p2')"></label>
+    </div>
+    <p class="note">For the final shared website, add your photos into the website folder before publishing.</p>
+    <button class="btn" onclick="go(4)">Read my letter 💌</button>
+  </section>
+
+  <section class="panel screen" id="s4">
+    <div class="kicker">from my heart to yours</div>
+    <h2>To My Baby 💌</h2>
+    <div style="font-size:55px;margin:8px">🌷</div>
+    <p style="text-align:left">Happy Birthday, my Baby! You make my world more beautiful. I hope your day is filled with smiles, love and lovely memories. Thank you for being in my life. I love you so much. ❤️</p>
+    <p><em>Forever yours ♡</em></p>
+    <button class="btn" onclick="go(0)">Replay our surprise ↻</button>
+  </section>
+  <div class="dots" id="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+  <div class="footer">MADE WITH LOVE · NOVEMBER 28 ♡</div>
+</main>
+<script>
+let current=0, giftOpened=false, wished=false;
+function go(n){document.getElementById('s'+current).classList.remove('active');current=n;document.getElementById('s'+current).classList.add('active');document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===n));window.scrollTo({top:0,behavior:'smooth'});}
+function openGift(){if(!giftOpened){giftOpened=true;document.getElementById('gift').textContent='💝';document.getElementById('giftText').textContent='Surprise! The best gift is having you in my life. ❤️';}}
+function wish(){if(!wished){wished=true;document.getElementById('cakeText').textContent='Whoosh! ✨ May all your wishes come true, Baby! 💗';document.querySelector('.cake').textContent='🎉🎂🎉';}}
+function addPhoto(e,id){const file=e.target.files[0];if(!file)return;const url=URL.createObjectURL(file);const box=document.getElementById(id);box.innerHTML='';const img=document.createElement('img');img.src=url;box.appendChild(img);}
+const hearts=document.getElementById('hearts');for(let i=0;i<18;i++){const h=document.createElement('span');h.className='heart';h.textContent=['♡','♥','✧'][i%3];h.style.left=(Math.random()*100)+'%';h.style.animationDuration=(9+Math.random()*10)+'s';h.style.animationDelay=(-Math.random()*18)+'s';h.style.fontSize=(14+Math.random()*22)+'px';hearts.appendChild(h);}
+</script>
+</body>
+</html>
